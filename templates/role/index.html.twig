@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des rôles{% endblock %}
+
+{% block body %}
+    <h1>Liste des rôles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Permissions</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in roles %}
+                <tr>
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.name }}</td>
+                    <td>{{ role.permissions|join(', ') }}</td>
+                    <td>
+                        <a href="{{ path('role_edit', {id: role.id}) }}">Modifier</a>
+                        <form action="{{ path('role_delete', {id: role.id}) }}" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ role.id) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('role_new') }}">Ajouter un rôle</a>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
+        {% block stylesheets %}
+            {# Inclure les feuilles de style ici #}
+        {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="{{ path('user_index') }}">Utilisateurs</a></li>
+                <li><a href="{{ path('role_index') }}">Rôles</a></li>
+            </ul>
+        </nav>
+
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            {# Inclure les scripts ici #}
+        {% endblock %}
+    </body>
+</html>
